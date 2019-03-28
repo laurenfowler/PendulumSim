@@ -1,0 +1,33 @@
+#ifndef GLOBALS
+#define GLOBALS
+
+double t = 0.0;
+double theta = M_PI/4.0;
+double omega = 0.0; //initial velocity
+unsigned frames = 0;
+char *charString = (char*) malloc(12*sizeof(char));
+bool omega_neg = 0;
+double curr_o;
+char *periodString = (char*) malloc(12*sizeof(char));
+char *desiredString = (char*) malloc(12*sizeof(char));
+double prev_o = -0;
+int prev_period = 0;
+int curr_period;
+long int period_frames;
+bool count = 1;
+char *actualPeriod = (char*) malloc(12 * sizeof(char));
+double prev_t = 0;
+double curr_t;
+float desired_fps;
+bool arg = 0;
+
+double camR = 6.9;
+double camT =  77.0;
+double camP =  325.0;
+double centerX = 0.0;
+double centerY = 0.0;
+double centerZ = 0.0;
+
+GLuint textureID[5];
+
+#endif
