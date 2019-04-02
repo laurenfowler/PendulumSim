@@ -3,40 +3,33 @@
 
 
 void keyboard(unsigned char key, int x, int y){
-	extern double camP, camT, camR;
+	extern double camX, camY, camZ;
 	extern double centerX, centerY, centerZ;
+	
 	switch(key){
 		case 'w':
-			camR = camR - 0.1;
-			if(camR <= 0){
-				camR = 0.0;
-			}
+			camX = camX + 0.1;
+			centerX = centerX + 0.1;
 			break;
 		case 's':
-			camR = camR + 0.1;
-			if(camR >= 30){
-				camR = 30.0;
-			}
+			camX = camX - 0.1;
+			centerX = centerX - 0.1;
 			break;
 		case 'a':
-			camP = camP - 1.0;
-			if(camP < 0){
-				camP = camP + 360.0;
-			}
+			camY = camY + 0.1;
+			centerY = centerY + 0.1;
 			break;
 		case 'd':
-			camP = camP + 1.0;
-			if(camP > 360.0){
-				camP = camP - 360.0;
-			}
+			camY = camY - 0.1;
+			centerY = centerY - 0.1;
 			break;
 		case 'q':
 			exit(0);
-			break;
+			break; 
 		case 'r':
-			camR = 6.9;
-			camT = 77.0;
-			camP = 325.0;
+			camX = -3.0;
+			camY = 0.0;
+			camZ = 1.0;
 			centerX = 0.0;
 			centerY = 0.0;
 			centerZ = 0.0;
@@ -49,9 +42,23 @@ void keyboard(unsigned char key, int x, int y){
 void processSpecialKeys(int key, int x, int y){
 	extern double camR, camT, camP;
 	extern double centerX, centerY, centerZ;
+	extern double rot;
 
 	switch(key){
-		case(GLUT_KEY_PAGE_UP):
+
+		case(GLUT_KEY_LEFT): 
+			rot = rot + 1.0;
+			if(rot > 360.0){
+				rot = rot - 360.0;
+			}
+			break;
+		case(GLUT_KEY_RIGHT): 
+			rot = rot - 1.0;
+			if(rot < 360.0){
+				rot = rot + 360.0;
+			}
+			break;
+/*case(GLUT_KEY_PAGE_UP):
 			camT = camT - 1.0;
 			if(camT < 0){
 				camT = camT + 360.0;
@@ -76,19 +83,45 @@ void processSpecialKeys(int key, int x, int y){
 			}
 			break;
 		case(GLUT_KEY_LEFT):
-			/*centerY = centerY - 1.0;
+			centerY = centerY - 1.0;
 			if(centerY < -90.0 ){
 				centerY = -90.0;
-			} */
+			} 
 			break; 
 		case(GLUT_KEY_RIGHT):
-			/*centerY = centerY + 1.0;
+			centerY = centerY + 1.0;
 			if(centerY > 90.0){
 				centerY = 90.0;
-			}*/
-			break; 
+			}
+			break; */
 		default:
 			break;
 	}
 
 }
+
+/*case 'w':
+			camR = camR - 0.1;
+			if(camR <= 0){
+				camR = 0.0;
+			}
+			break;
+		case 's':
+			camR = camR + 0.1;
+			if(camR >= 30){
+				camR = 30.0;
+			}
+			break;
+		case 'a':
+			camP = camP - 1.0;
+			if(camP < 0){
+				camP = camP + 360.0;
+			}
+			break;
+		case 'd':
+			camP = camP + 1.0;
+			if(camP > 360.0){
+				camP = camP - 360.0;
+			}
+			break; */
+

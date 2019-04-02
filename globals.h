@@ -21,10 +21,15 @@ double curr_t;
 float desired_fps;
 bool arg = 0;
 
-double camR = 6.9;
+double camX = -3.0;
+double camY = 0.0;
+double camZ = 1.0;
+double rot = 0.0;
+
+/*double camR = 6.9;
 double camT =  77.0;
-double camP =  325.0;
-double centerX = 0.0;
+double camP =  325.0; */
+double centerX = 1.0;
 double centerY = 0.0;
 double centerZ = 0.0;
 

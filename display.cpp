@@ -16,10 +16,11 @@ void display(void){
 	extern long int period_frames;
 	extern char *charString, *periodString;	
 	extern bool count, omega_neg;
-	extern double camR, camP, camT;
+	//extern double camR, camP, camT;
 	extern double centerX, centerY, centerZ;
-
-
+	extern double camX, camY, camZ;
+	extern double rot;
+	double X, Y;
 	frames++;
 
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -31,7 +32,7 @@ void display(void){
 //	gluLookAt( 8.0,   -6.0, 2.0,  // Eye
 
 	//calculate eye
-	float eyeX = camR*sin(camT*M_PI/180.0)*cos(camP*M_PI/180.0);
+/*	float eyeX = camR*sin(camT*M_PI/180.0)*cos(camP*M_PI/180.0);
 	float eyeY = camR*sin(camT*M_PI/180.0)*sin(camP*M_PI/180.0);
 	float eyeZ = camR*cos(camT*M_PI/180.0);
 
@@ -40,20 +41,26 @@ void display(void){
 	float Y = cos(centerY*M_PI/180.0)*hypot;
 	float Z = sin(centerZ*M_PI/180.0)*hypot;
 
-    //cout << centerY << " " << Y << endl;
-	//cout << centerY << " " << centerZ << endl;
-	//cout << Y << " " << Z << endl;
-
 	gluLookAt(eyeX, eyeY, eyeZ,
-              centerX, centerY, Z,  // Center
-              0.0,   0.0, 1.0); // Up
+		centerX, centerY, centerZ,  // Center
+		0.0,   0.0, 1.0); // Up */
+
+	X = (centerX * cos(rot * 3.14/180.0)) + (centerY * -sin(rot * 3.14/180.0));
+	Y = (centerX * sin(rot * 3.14/180.0)) + (centerY * cos(rot * 3.14/180.0));
+	X = X + camX; //this is so it adds the eye position and rotates around it properly
+	Y = Y + camY;
+
+	double cX = camX + cos(rot);
+	double cY = camY + sin(rot);
+
+	gluLookAt(camX, camY, camZ,
+			  X, Y, 1.0,
+			  0.0, 0.0, 1.0);
+
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
-	//cout << camR << " " << camT << " " << camP << endl;
-	//cout << centerX << " " << centerY << " " << centerZ << endl;
 
-/*
 	glBegin(GL_LINES);
 	glVertex3f(0.0, -4.0, 0.0); //y - green
 	glVertex3f(0.0, 4.0, 0.0);
@@ -65,7 +72,7 @@ void display(void){
 	glColor3f(0.0, 0.0, 1.0);   // x - blue
 	glVertex3f(4.0, 0.0, 0.0);
 	glVertex3f(-4.0, 0.0, 0.0);
-	glEnd(); */
+	glEnd(); 
 
 	//draw pendulum
 	glPushMatrix();
