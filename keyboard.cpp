@@ -5,15 +5,16 @@
 void keyboard(unsigned char key, int x, int y){
 	extern double camX, camY, camZ;
 	extern double centerX, centerY, centerZ;
-	
+	extern double rot;
+
 	switch(key){
 		case 'w':
-			camX = camX + 0.1;
-			centerX = centerX + 0.1;
+			camX = camX + /*0.1;*/ cos(rot * 3.14/180.0);
+			centerX = centerX + /*0.1;*/ cos(rot * 3.14/180.0);
 			break;
 		case 's':
-			camX = camX - 0.1;
-			centerX = centerX - 0.1;
+			camX = camX - /*0.1;*/ cos(rot * 3.14/180.0);
+			centerX = centerX -/* 0.1;*/ cos(rot * 3.14/180.0) ;
 			break;
 		case 'a':
 			camY = camY + 0.1;

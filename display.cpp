@@ -50,8 +50,6 @@ void display(void){
 	X = X + camX; //this is so it adds the eye position and rotates around it properly
 	Y = Y + camY;
 
-	double cX = camX + cos(rot);
-	double cY = camY + sin(rot);
 
 	gluLookAt(camX, camY, camZ,
 			  X, Y, 1.0,
@@ -60,6 +58,7 @@ void display(void){
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
+	glRotated(rot, 0, 0, 1);
 
 	glBegin(GL_LINES);
 	glVertex3f(0.0, -4.0, 0.0); //y - green
