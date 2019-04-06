@@ -9,12 +9,12 @@ void keyboard(unsigned char key, int x, int y){
 
 	switch(key){
 		case 'w':
-			camX = camX + /*0.1;*/ cos(rot * 3.14/180.0);
-			centerX = centerX + /*0.1;*/ cos(rot * 3.14/180.0);
+			camX = camX + 0.1;
+			centerX = centerX + 0.1;
 			break;
 		case 's':
-			camX = camX - /*0.1;*/ cos(rot * 3.14/180.0);
-			centerX = centerX -/* 0.1;*/ cos(rot * 3.14/180.0) ;
+			camX = camX - 0.1;
+			centerX = centerX - 0.1; 
 			break;
 		case 'a':
 			camY = camY + 0.1;
@@ -47,7 +47,7 @@ void processSpecialKeys(int key, int x, int y){
 
 	switch(key){
 
-		case(GLUT_KEY_LEFT): 
+		case(GLUT_KEY_LEFT):
 			rot = rot + 1.0;
 			if(rot > 360.0){
 				rot = rot - 360.0;

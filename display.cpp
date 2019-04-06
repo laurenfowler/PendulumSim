@@ -20,7 +20,7 @@ void display(void){
 	extern double centerX, centerY, centerZ;
 	extern double camX, camY, camZ;
 	extern double rot;
-	double X, Y;
+	double X, Y, Z;
 	frames++;
 
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -49,16 +49,29 @@ void display(void){
 	Y = (centerX * sin(rot * 3.14/180.0)) + (centerY * cos(rot * 3.14/180.0));
 	X = X + camX; //this is so it adds the eye position and rotates around it properly
 	Y = Y + camY;
+    Z = 1.0;
+
+    //calculate directional vector
+    double dirX = X - camX;
+    double dirY = Y - camY;
+    double dirZ = Z - camZ;
+
+    //calculate crossProd vector
+    double crossX = (dirY*1.0) - (dirZ*0.0);
+    double crossY = (dirX*1.0) - (dirZ*0.0);
+    double crossZ = (dirX*0.0) - (dirY*0.0);
 
 
-	gluLookAt(camX, camY, camZ,
-			  X, Y, 1.0,
-			  0.0, 0.0, 1.0);
+    
+
+	gluLookAt(camX + crossX + dirX, camY + crossY + dirY, camZ + crossZ + dirZ,//camX, camY, camZ,
+			  X + crossX + dirX, Y + crossY + dirY, Z + crossZ + dirZ,
+			  0.0, 0.0, 1.0); 
 
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
-	glRotated(rot, 0, 0, 1);
+	//glRotated(rot, 0, 0, 1);
 
 	glBegin(GL_LINES);
 	glVertex3f(0.0, -4.0, 0.0); //y - green
