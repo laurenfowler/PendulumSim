@@ -18,4 +18,7 @@ void draw_table();
 void keyboard(unsigned char key, int x, int y);
 void processSpecialKeys(int key, int x, int y);
 void loadTextures();
+void rotateAround();
+void forward();
+void backward();
 #endif

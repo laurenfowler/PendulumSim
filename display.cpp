@@ -16,11 +16,8 @@ void display(void){
 	extern long int period_frames;
 	extern char *charString, *periodString;	
 	extern bool count, omega_neg;
-	//extern double camR, camP, camT;
-	extern double centerX, centerY, centerZ;
-	extern double camX, camY, camZ;
-	extern double rot;
-	double X, Y, Z;
+	extern double camX, camY, camZ, centerX, centerY, centerZ;
+	extern double X, Y;
 	frames++;
 
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -29,49 +26,15 @@ void display(void){
 	// We are going to set our position to be down the Y-Axis looking at the
 	// center of the coordinate frame.  The positive Z-Axis will be up.
 	
-//	gluLookAt( 8.0,   -6.0, 2.0,  // Eye
+//	cout << "camera: " << camX << ", " << camY << ", " << camZ << endl;
+//	cout << "center: " << centerX << ", " << centerY << ", " << centerZ << endl;
 
-	//calculate eye
-/*	float eyeX = camR*sin(camT*M_PI/180.0)*cos(camP*M_PI/180.0);
-	float eyeY = camR*sin(camT*M_PI/180.0)*sin(camP*M_PI/180.0);
-	float eyeZ = camR*cos(camT*M_PI/180.0);
-
-	float hypot = 4.0;
-	float X = eyeX + 4.0;
-	float Y = cos(centerY*M_PI/180.0)*hypot;
-	float Z = sin(centerZ*M_PI/180.0)*hypot;
-
-	gluLookAt(eyeX, eyeY, eyeZ,
-		centerX, centerY, centerZ,  // Center
-		0.0,   0.0, 1.0); // Up */
-
-	X = (centerX * cos(rot * 3.14/180.0)) + (centerY * -sin(rot * 3.14/180.0));
-	Y = (centerX * sin(rot * 3.14/180.0)) + (centerY * cos(rot * 3.14/180.0));
-	X = X + camX; //this is so it adds the eye position and rotates around it properly
-	Y = Y + camY;
-    Z = 1.0;
-
-    //calculate directional vector
-    double dirX = X - camX;
-    double dirY = Y - camY;
-    double dirZ = Z - camZ;
-
-    //calculate crossProd vector
-    double crossX = (dirY*1.0) - (dirZ*0.0);
-    double crossY = (dirX*1.0) - (dirZ*0.0);
-    double crossZ = (dirX*0.0) - (dirY*0.0);
-
-
-    
-
-	gluLookAt(camX + crossX + dirX, camY + crossY + dirY, camZ + crossZ + dirZ,//camX, camY, camZ,
-			  X + crossX + dirX, Y + crossY + dirY, Z + crossZ + dirZ,
+	gluLookAt(camX, camY, camZ,
+			  centerX, centerY, centerZ,
 			  0.0, 0.0, 1.0); 
 
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
-
-	//glRotated(rot, 0, 0, 1);
 
 	glBegin(GL_LINES);
 	glVertex3f(0.0, -4.0, 0.0); //y - green

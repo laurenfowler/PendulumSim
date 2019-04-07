@@ -1,9 +1,9 @@
 CC = g++
 CFLAGS = -g
 GLUT = -lGL -lGLU -lglut -lGLEW -lm libSOIL.a
-OBJS = display.o physics.o call_step.o draw_objects.o keyboard.o tex.o
+OBJS = display.o physics.o call_step.o draw_objects.o keyboard.o tex.o camera.o
 HEADERS = includes.h globals.h prototypes.h SOIL.h
-FLAGS = #-DTEXTURE
+FLAGS = -DTEXTURE
 
 run: main.o $(OBJS) $(HEADERS)
 	$(CC) $(CLFAGS) main.o $(OBJS) $(GLUT) 
@@ -28,6 +28,10 @@ keyboard.o: keyboard.cpp $(HEADERS)
 
 tex.o: tex.cpp $(HEADERS)
 	$(CC) $(CFLAGS) -c tex.cpp
+
+camera.o : camera.cpp $(HEADERS)
+	$(CC) $(CFLAGS) -c camera.cpp
+
 clean:
 	rm *.o
 	rm a.out

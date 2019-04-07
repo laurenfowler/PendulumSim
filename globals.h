@@ -31,7 +31,10 @@ double camT =  77.0;
 double camP =  325.0; */
 double centerX = 1.0;
 double centerY = 0.0;
-double centerZ = 0.0;
+double centerZ = 1.0;
+double speed = 0.3;
+double X = 0.0;
+double Y = 0.0;
 
 GLuint textureID[5];
 
