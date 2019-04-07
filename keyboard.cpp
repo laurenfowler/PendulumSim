@@ -50,14 +50,14 @@ void processSpecialKeys(int key, int x, int y){
 	switch(key){
 
 		case(GLUT_KEY_LEFT):
-			rot = rot + 1.0;
-			if(rot > 360.0){
-				rot = rot - 360.0;
-			}
+			rot = 1.0; //rot + 1.0;
+			//if(rot > 360.0){
+			//	rot = rot - 360.0;
+			//}
 			rotateAround();
 			break;
 		case(GLUT_KEY_RIGHT): 
-			rot = rot - 1.0;
+			rot = -1.0; //rot - 1.0;
 			if(rot < 360.0){
 				rot = rot + 360.0;
 			}
