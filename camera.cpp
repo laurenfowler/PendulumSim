@@ -37,17 +37,18 @@ void forward(){
 
 	//normalize the vector
     double magnitude = sqrt((dirX*dirX) + (dirY*dirY) + (dirZ*dirZ));
+	cout << magnitude << endl;
     if(magnitude != 0){
         dirX = dirX/magnitude;
         dirY = dirY/magnitude;
         dirZ = dirZ/magnitude;
     }
 
-	camX = camZ + (dirX * speed);
+	camX = camX + (dirX * speed);
 	camY = camY + (dirY * speed);
 	camZ = camZ + (dirZ * speed);
 
-	centerX = centerZ + (dirX * speed);
+	centerX = centerX + (dirX * speed);
 	centerY = centerY + (dirY * speed);
 	centerZ = centerZ + (dirZ * speed);
 
@@ -73,55 +74,9 @@ void backward(){
 	camY = camY - (dirY * speed);
 	camZ = camZ - (dirZ * speed);
 
-	centerX = centerZ + (dirX * speed);
+	centerX = centerX + (dirX * speed);
 	centerY = centerY + (dirY * speed);
 	centerZ = centerZ + (dirZ * speed);
 
 }
-
-
-/*void calc_camera(char key, double &camX, double &camZ, double &camY, double &centerX, double &centerY, double &centerZ){
-
-	extern double rot;
-	double X, Y, Z;
-
-	X = (centerX * cos(rot * 3.14/180.0)) + (centerY * -sin(rot * 3.14/180.0));
-    Y = (centerX * sin(rot * 3.14/180.0)) + (centerY * cos(rot * 3.14/180.0));
-    X = X + camX; //this is so it adds the eye position and rotates around it properly
-    Y = Y + camY;
-    Z = 1.0;
-
-	//calculate directional vector
-	double dirX = X - camX;
-    double dirY = Y - camY;
-    double dirZ = Z - camZ;
-
-	//normalize the vector
-    double magnitude = sqrt((dirX*dirX) + (dirY*dirY) + (dirZ*dirZ));
-    if(magnitude != 0){
-        dirX = dirX/magnitude;
-        dirY = dirY/magnitude;
-        dirZ = dirZ/magnitude;
-    }
-
-    double speed = 0.3;
-	double crossX = (dirY*1.0) - (dirZ*0.0);
-    double crossY = (dirX*1.0) - (dirZ*0.0);
-    double crossZ = (dirX*0.0) - (dirY*0.0);
-
-    camX = camX + (dirX * speed) + (crossX * speed);
-    camY = camY + (dirY * speed) + (crossY * speed);
-    camZ = camZ + (dirZ * speed) + (crossZ * speed);
-
-    X = X + (dirX * speed) + (crossZ * speed);
-    Y = Y + (dirY * speed) + (crossY * speed);
-    Z = Z + (dirZ * speed) + (crossZ * speed);
-
-	centerX = X;
-	centerY = Y;
-	centerZ = Z;
-
-}*/
-
-
 
