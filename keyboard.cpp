@@ -19,12 +19,14 @@ void keyboard(unsigned char key, int x, int y){
 			backward();
 			break;
 		case 'a':
-			camY = camY + 0.1;
-			centerY = centerY + 0.1;
+			//camY = camY + 0.1;
+			//centerY = centerY + 0.1;
+			left();
 			break;
 		case 'd':
-			camY = camY - 0.1;
-			centerY = centerY - 0.1;
+			//camY = camY - 0.1;
+			//centerY = centerY - 0.1;
+			right();
 			break;
 		case 'q':
 			exit(0);
@@ -35,7 +37,7 @@ void keyboard(unsigned char key, int x, int y){
 			camZ = 1.0;
 			centerX = 0.0;
 			centerY = 0.0;
-			centerZ = 0.0;
+			centerZ = 1.0;
 		default:
 			break;
 	}

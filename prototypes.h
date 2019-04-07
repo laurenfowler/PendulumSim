@@ -21,4 +21,6 @@ void loadTextures();
 void rotateAround();
 void forward();
 void backward();
+void left();
+void right();
 #endif

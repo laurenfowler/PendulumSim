@@ -26,8 +26,8 @@ void display(void){
 	// We are going to set our position to be down the Y-Axis looking at the
 	// center of the coordinate frame.  The positive Z-Axis will be up.
 	
-//	cout << "camera: " << camX << ", " << camY << ", " << camZ << endl;
-//	cout << "center: " << centerX << ", " << centerY << ", " << centerZ << endl;
+	//cout << "camera: " << camX << ", " << camY << ", " << camZ << endl;
+	//cout << "center: " << centerX << ", " << centerY << ", " << centerZ << endl;
 
 	gluLookAt(camX, camY, camZ,
 			  centerX, centerY, centerZ,

@@ -12,8 +12,6 @@ void rotateAround(){
 	dirY = centerY - camY;
 	dirZ = centerZ - camZ;
 
-	//cout << dirX << " " << dirY << " " << dirZ << endl;
-
 	dirX = (dirX * cos(rot * 3.14/180.0)) + (dirY * -sin(rot * 3.14/180.0));
 	dirY = (dirX * sin(rot * 3.14/180.0)) + (dirY * cos(rot * 3.14/180.0));
 
@@ -37,7 +35,6 @@ void forward(){
 
 	//normalize the vector
     double magnitude = sqrt((dirX*dirX) + (dirY*dirY) + (dirZ*dirZ));
-	cout << magnitude << endl;
     if(magnitude != 0){
         dirX = dirX/magnitude;
         dirY = dirY/magnitude;
@@ -79,4 +76,73 @@ void backward(){
 	centerZ = centerZ + (dirZ * speed);
 
 }
+
+void left(){
+	double dirX, dirY, dirZ;
+	double crossX, crossY, crossZ;
+	double upX = 0.0;
+	double upY = 0.0;
+	double upZ = 1.0;
+
+	//calculate directional vector
+	dirX = centerX - camX;
+    dirY = centerY - camY;
+    dirZ = centerZ - camZ;
+
+	crossX = (dirY*upZ) - (dirZ*upY);
+	crossY = (dirX*upZ) - (dirZ*upX);
+	crossZ = (dirX*upY) - (dirY*upX);
+
+	camX = camX + (crossX*speed);
+	camY = camY + (crossY*speed);
+	camZ = camZ + (crossZ*speed);
+
+	centerX = centerX + (crossX*speed);
+	centerY = centerY + (crossY*speed);
+	centerZ = centerZ + (crossZ*speed);
+}
+
+void right(){
+	double dirX, dirY, dirZ;
+	double crossX, crossY, crossZ;
+	double upX = 0.0;
+	double upY = 0.0;
+	double upZ = 1.0;
+
+
+	//calculate directional vector
+	dirX = centerX - camX;
+    dirY = centerY - camY;
+    dirZ = centerZ - camZ;
+
+	crossX = (upY*dirZ) - (upZ*dirY);
+	crossY = (upZ*dirZ) - (upZ*dirX);
+	crossZ = (upX*dirY) - (upY*dirX);
+	cout << crossZ << endl;
+
+	
+	camX = camX + (crossX*speed);
+	camY = camY + (crossY*speed);
+	camZ = camZ + (crossZ*speed);
+
+	centerX = centerX + (crossX*speed);
+	centerY = centerY + (crossY*speed);
+	centerZ = centerZ + (crossZ*speed);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
