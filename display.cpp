@@ -36,6 +36,8 @@ void display(void){
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
+	lighting();
+
 	glBegin(GL_LINES);
 	glVertex3f(0.0, -4.0, 0.0); //y - green
 	glVertex3f(0.0, 4.0, 0.0);
@@ -48,6 +50,12 @@ void display(void){
 	glVertex3f(4.0, 0.0, 0.0);
 	glVertex3f(-4.0, 0.0, 0.0);
 	glEnd(); 
+
+
+	glPushMatrix();
+		glTranslated(0.0, 0.0, 4.0);
+		glutWireCube(0.1);
+	glPopMatrix();
 
 	//draw pendulum
 	glPushMatrix();
