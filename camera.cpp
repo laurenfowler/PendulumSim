@@ -101,13 +101,13 @@ void left(){
 	crossY = (dirX*upZ) - (dirZ*upX);
 	crossZ = (dirX*upY) - (dirY*upX);
 
-	camX = camX - (crossX*speed);
-	camY = camY - (crossY*speed);
-	camZ = camZ - (crossZ*speed);
+	camX = camX + (crossX*speed);
+	camY = camY + (crossY*speed);
+	camZ = camZ + (crossZ*speed);
 
-	centerX = centerX - (crossX*speed);
-	centerY = centerY - (crossY*speed);
-	centerZ = centerZ - (crossZ*speed);
+	centerX = centerX + (crossX*speed);
+	centerY = centerY + (crossY*speed);
+	centerZ = centerZ + (crossZ*speed);
 
 	cout << camX << " " << camY << " " << camZ << endl;	
 }
