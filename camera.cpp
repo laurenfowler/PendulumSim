@@ -89,30 +89,13 @@ void left(){
     dirY = centerY - camY;
     dirZ = centerZ - camZ;
 
-	crossX = (dirY*upZ) - (dirZ*upY);
-	crossY = (dirX*upZ) - (dirZ*upX);
-	crossZ = (dirX*upY) - (dirY*upX);
-
-	camX = camX + (crossX*speed);
-	camY = camY + (crossY*speed);
-	camZ = camZ + (crossZ*speed);
-
-	centerX = centerX + (crossX*speed);
-	centerY = centerY + (crossY*speed);
-	centerZ = centerZ + (crossZ*speed);
-}
-
-void right(){
-	double dirX, dirY, dirZ;
-	double crossX, crossY, crossZ;
-	double upX = 0.0;
-	double upY = 0.0;
-	double upZ = 1.0;
-
-	//calculate directional vector
-	dirX = centerX - camX;
-    dirY = centerY - camY;
-    dirZ = centerZ - camZ;
+	//normalize the vector
+    double magnitude = sqrt((dirX*dirX) + (dirY*dirY) + (dirZ*dirZ));
+    if(magnitude != 0){
+        dirX = dirX/magnitude;
+        dirY = dirY/magnitude;
+        dirZ = dirZ/magnitude;
+    }
 
 	crossX = (dirY*upZ) - (dirZ*upY);
 	crossY = (dirX*upZ) - (dirZ*upX);
@@ -125,9 +108,10 @@ void right(){
 	centerX = centerX - (crossX*speed);
 	centerY = centerY - (crossY*speed);
 	centerZ = centerZ - (crossZ*speed);
+
+	cout << camX << " " << camY << " " << camZ << endl;	
 }
 
-/*
 void right(){
 	double dirX, dirY, dirZ;
 	double crossX, crossY, crossZ;
@@ -135,40 +119,31 @@ void right(){
 	double upY = 0.0;
 	double upZ = 1.0;
 
-
 	//calculate directional vector
 	dirX = centerX - camX;
     dirY = centerY - camY;
     dirZ = centerZ - camZ;
 
-	crossX = (upY*dirZ) - (upZ*dirY);
-	crossY = (upZ*dirZ) - (upZ*dirX);
-	crossZ = (upX*dirY) - (upY*dirX);
-	cout << crossZ << endl;
+	//normalize the vector
+    double magnitude = sqrt((dirX*dirX) + (dirY*dirY) + (dirZ*dirZ));
+    if(magnitude != 0){
+        dirX = dirX/magnitude;
+        dirY = dirY/magnitude;
+        dirZ = dirZ/magnitude;
+    }
 
-	
-	camX = camX + (crossX*speed);
-	camY = camY + (crossY*speed);
-	camZ = camZ + (crossZ*speed);
+	crossX = (dirY*upZ) - (dirZ*upY);
+	crossY = (dirX*upZ) - (dirZ*upX);
+	crossZ = (dirX*upY) - (dirY*upX);
 
-	centerX = centerX + (crossX*speed);
-	centerY = centerY + (crossY*speed);
-	centerZ = centerZ + (crossZ*speed);
+	camX = camX - (crossX*speed);
+	camY = camY - (crossY*speed);
+	camZ = camZ - (crossZ*speed);
 
-} */
+	centerX = centerX - (crossX*speed);
+	centerY = centerY - (crossY*speed);
+	centerZ = centerZ - (crossZ*speed);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	cout << camX << " " << camY << " " << camZ << endl;
+}
 
