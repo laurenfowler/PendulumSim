@@ -53,7 +53,7 @@ void display(void){
 
 
 	glPushMatrix();
-		glTranslated(0.0, 0.0, 4.0);
+		glTranslated(0.0, 0.0, 2.0);
 		glutWireCube(0.1);
 	glPopMatrix();
 
@@ -73,7 +73,7 @@ void display(void){
 	glPushMatrix();
 		glTranslated(0.0, 0.0, 1.6);
 		glScalef(5.0, 6.0, 4.0);
-		draw_room();
+//		draw_room();
 	glPopMatrix(); 
 
 
