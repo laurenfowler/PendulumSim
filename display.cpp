@@ -36,7 +36,9 @@ void display(void){
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
+	#ifdef LIGHTING
 	lighting();
+	#endif
 
 	glBegin(GL_LINES);
 	glVertex3f(0.0, -4.0, 0.0); //y - green
@@ -53,7 +55,7 @@ void display(void){
 
 
 	glPushMatrix();
-		glTranslated(0.0, 0.0, 2.0);
+		glTranslated(0.0, 0.0, 5.0);
 		glutWireCube(0.1);
 	glPopMatrix();
 
@@ -71,9 +73,9 @@ void display(void){
 
 	//draw room
 	glPushMatrix();
-		glTranslated(0.0, 0.0, 1.6);
-		glScalef(5.0, 6.0, 4.0);
-//		draw_room();
+		glTranslated(0.0, 0.0, 3.8);
+		glScalef(10.0, 9.0, 6.0);
+		draw_room();
 	glPopMatrix(); 
 
 

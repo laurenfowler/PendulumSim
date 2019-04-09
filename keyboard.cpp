@@ -65,19 +65,15 @@ void processSpecialKeys(int key, int x, int y){
 			}
 			rotateAround();
 			break;
-/*case(GLUT_KEY_PAGE_UP):
-			camT = camT - 1.0;
-			if(camT < 0){
-				camT = camT + 360.0;
-			}
+		case(GLUT_KEY_PAGE_UP):
+			camZ = camZ + 0.1;
+			centerZ = centerZ + 0.1;
 			break;
 		case(GLUT_KEY_PAGE_DOWN):
-			camT = camT + 1.0;
-			if(camT > 360.0){
-				camT = camT - 360.0;
-			}
+			camZ = camZ - 0.1;
+			centerZ = centerZ - 0.1;
 			break;
-		case(GLUT_KEY_UP):
+		/*case(GLUT_KEY_UP):
 			centerZ = centerZ + 1.0;
 			if(centerZ > 90.0){
 				centerZ = 90.0;

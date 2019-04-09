@@ -4,22 +4,69 @@
 void draw_table(){
 	glColor3f(1.0, .98431373, .09803922);
 	
+	#ifdef LIGHTING
+		GLfloat mat_specular[] = {1.0, 1.0, 1.0, 1.0};
+		GLfloat diffuseMaterial[4] = {1.0, 1.0, 1.0, 1.0};
+
+		glShadeModel(GL_SMOOTH);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuseMaterial);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 20.0);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_specular);
+
+		glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+		glEnable(GL_COLOR_MATERIAL);
+
+	#endif
+
 	//draw top of table
 	glPushMatrix();
+		glRotated(45.0, 0.0, 0.0, 1.0);
 		gluCylinder(gluNewQuadric(), 
 				   (GLdouble) 1.0, 
 				   (GLdouble) 1.0, 	
 				   (GLdouble) 0.1, 
-				   (GLint)     20,
+				   (GLint)      4,
 				   (GLint)     20);
 	glPopMatrix();
+
+	#ifdef LIGHTING
+
+		glShadeModel(GL_SMOOTH);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuseMaterial);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 20.0);
+
+		glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+		glEnable(GL_COLOR_MATERIAL);
+
+	#endif
+
+	glColor3f(1.0, .5, 1.0);
 	glPushMatrix();
-		glScalef(1.0, 1.0, 0.0);
-		gluSphere(gluNewQuadric(),
-				 (GLdouble) 1.0, 
-				 (GLint)     20, 
-				 (GLint)     20);
-	glPopMatrix();
+		glTranslated(0.0, 0.0, 0.1);
+		glScalef(.71, .71, 0.0);
+		glBegin(GL_POLYGON);
+			glVertex3d(1.0, 1.0, 0.0);
+			glVertex3d(-1.0, 1.0, 0.0);
+			glVertex3d(-1.0, -1.0, 0.0);
+			glVertex3d(1.0, -1.0, 0.0);
+		glEnd();
+		
+	glPopMatrix(); 
+
+	#ifdef LIGHTING
+
+		glShadeModel(GL_SMOOTH);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuseMaterial);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 20.0);
+
+		glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+		glEnable(GL_COLOR_MATERIAL);
+
+	#endif
+
 
 	glColor3f(1.0, .98431373, .09803922);
 	//draw stand
@@ -33,6 +80,19 @@ void draw_table(){
 				   (GLint)      20);
 	glPopMatrix();
 
+	#ifdef LIGHTING
+
+		glShadeModel(GL_SMOOTH);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuseMaterial);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 20.0);
+
+		glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+		glEnable(GL_COLOR_MATERIAL);
+
+	#endif
+
+
 	//draw base
 	glPushMatrix();
 		glTranslated(0.0, 0.0, -1.0);
@@ -44,6 +104,10 @@ void draw_table(){
 				   (GLint)      20);
 	glPopMatrix();
 	
+	#ifdef LIGHTING
+	glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+	glEnable(GL_COLOR_MATERIAL);
+	#endif
 
 }
 
@@ -52,6 +116,20 @@ void draw_room(){
 	#ifdef TEXTURE
 	extern GLuint textureID[5];
 	glEnable(GL_TEXTURE_2D);
+	#endif
+
+	#ifdef LIGHTING
+		GLfloat mat_specular[] = {1.0, 1.0, 1.0, 1.0};
+		GLfloat diffuseMaterial[4] = {0.5, 0.5, 0.5, 1.0};
+
+		glShadeModel(GL_SMOOTH);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuseMaterial);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 20.0);
+
+		glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+		glEnable(GL_COLOR_MATERIAL);
+
 	#endif
 
 	
@@ -158,6 +236,20 @@ void draw_room(){
 void draw_pendulum(){
 
 	extern double theta;
+
+	#ifdef LIGHTING
+		GLfloat mat_specular[] = {1.0, 1.0, 1.0, 1.0};
+		GLfloat diffuseMaterial[4] = {1.0, 1.0, 1.0, 1.0};
+
+		glShadeModel(GL_SMOOTH);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuseMaterial);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 20.0);
+
+		glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+		glEnable(GL_COLOR_MATERIAL);
+
+	#endif
 
 	//draw a cylinder
 	glPushMatrix();
