@@ -36,7 +36,7 @@ void display(void){
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
-	glBegin(GL_LINES);
+/*	glBegin(GL_LINES);
 	glVertex3f(0.0, -4.0, 0.0); //y - green
 	glVertex3f(0.0, 4.0, 0.0);
 
@@ -47,7 +47,12 @@ void display(void){
 	glColor3f(0.0, 0.0, 1.0);   // x - blue
 	glVertex3f(4.0, 0.0, 0.0);
 	glVertex3f(-4.0, 0.0, 0.0);
-	glEnd(); 
+	glEnd(); */
+
+	glPushMatrix();
+		glTranslated(0.0, 0.0, 5.0);
+		glutWireCube(0.1);
+	glPopMatrix();
 
 	//draw pendulum
 	glPushMatrix();
@@ -63,11 +68,15 @@ void display(void){
 
 	//draw room
 	glPushMatrix();
-		glTranslated(0.0, 0.0, 1.6);
-		glScalef(5.0, 6.0, 4.0);
+		glTranslated(0.0, 0.0, 3.8);
+		glScalef(10.0, 9.0, 6.0);
 		draw_room();
 	glPopMatrix(); 
 
+
+	#ifdef LIGHTING
+	lighting();
+	#endif
 
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();

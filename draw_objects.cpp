@@ -3,23 +3,48 @@
 
 void draw_table(){
 	glColor3f(1.0, .98431373, .09803922);
-	
+	//glColor3f(1.0, 1.0, 1.0);
+
+    glPushMatrix();
+	#ifdef LIGHTING
+    GLfloat mat_specular[] = {0.0, 0.0, 0.0, 1.0};
+    GLfloat mat_amb_diff[] = {1.0, 0.98, 0.09, 1.0};
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, mat_amb_diff);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+	#endif
+
 	//draw top of table
-	glPushMatrix();
+		glRotated(45.0, 0.0, 0.0, 1.0);
 		gluCylinder(gluNewQuadric(), 
 				   (GLdouble) 1.0, 
 				   (GLdouble) 1.0, 	
 				   (GLdouble) 0.1, 
-				   (GLint)     20,
+				   (GLint)      4,
 				   (GLint)     20);
-	glPopMatrix();
+
+	#ifdef LIGHTING
+    
+   	#endif
+    glPopMatrix();
+
+    glColorMaterial(GL_FRONT, GL_DIFFUSE);
+	glColor3f(1.0, .5, 1.0);
 	glPushMatrix();
-		glScalef(1.0, 1.0, 0.0);
-		gluSphere(gluNewQuadric(),
-				 (GLdouble) 1.0, 
-				 (GLint)     20, 
-				 (GLint)     20);
-	glPopMatrix();
+		glTranslated(0.0, 0.0, 0.1);
+		glScalef(.71, .71, 0.0);
+		glBegin(GL_POLYGON);
+			glVertex3d(1.0, 1.0, 0.0);
+			glVertex3d(-1.0, 1.0, 0.0);
+			glVertex3d(-1.0, -1.0, 0.0);
+			glVertex3d(1.0, -1.0, 0.0);
+		glEnd();
+		
+	glPopMatrix(); 
+
+	#ifdef LIGHTING
+    
+	#endif
+
 
 	glColor3f(1.0, .98431373, .09803922);
 	//draw stand
@@ -33,6 +58,11 @@ void draw_table(){
 				   (GLint)      20);
 	glPopMatrix();
 
+	#ifdef LIGHTING
+
+	#endif
+
+
 	//draw base
 	glPushMatrix();
 		glTranslated(0.0, 0.0, -1.0);
@@ -44,17 +74,29 @@ void draw_table(){
 				   (GLint)      20);
 	glPopMatrix();
 	
+	#ifdef LIGHTING
+	#endif
 
 }
 
 void draw_room(){
+
+	#ifdef LIGHTING
+    //this declares material properties
+    GLfloat mat_specular[] = {.5, .5, .5, 1.0};
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+
+    //this enables already defined colors to be applied to ambient and diffuse
+    glEnable(GL_COLOR_MATERIAL);
+    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+	
+    #endif
 
 	#ifdef TEXTURE
 	extern GLuint textureID[5];
 	glEnable(GL_TEXTURE_2D);
 	#endif
 
-	
 	glColor3ub(25, 189, 255); //blue
 
 	#ifdef TEXTURE
@@ -153,11 +195,26 @@ void draw_room(){
 			glTexCoord2d(1.0, 0.0); glVertex3f( 1.0, -1.0, -1.0);
 		glEnd();
 	glPopMatrix();
+
+    #ifdef LIGHTING
+        glDisable(GL_COLOR_MATERIAL);
+    #endif
 }
 
 void draw_pendulum(){
 
 	extern double theta;
+
+	#ifdef LIGHTING
+    //this declares material properties
+    GLfloat mat_specular[] = {.5, .5, .5, 1.0};
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+
+    //this enables already defined colors to be applied to ambient and diffuse
+    glEnable(GL_COLOR_MATERIAL);
+    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+	
+    #endif
 
 	//draw a cylinder
 	glPushMatrix();
@@ -236,5 +293,8 @@ void draw_pendulum(){
 		glEnd();
 	glPopMatrix(); 
 
+    #ifdef LIGHTING
+        glDisable(GL_COLOR_MATERIAL);
+    #endif
 
 }
