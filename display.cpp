@@ -36,11 +36,7 @@ void display(void){
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
-	#ifdef LIGHTING
-	lighting();
-	#endif
-
-	glBegin(GL_LINES);
+/*	glBegin(GL_LINES);
 	glVertex3f(0.0, -4.0, 0.0); //y - green
 	glVertex3f(0.0, 4.0, 0.0);
 
@@ -51,8 +47,7 @@ void display(void){
 	glColor3f(0.0, 0.0, 1.0);   // x - blue
 	glVertex3f(4.0, 0.0, 0.0);
 	glVertex3f(-4.0, 0.0, 0.0);
-	glEnd(); 
-
+	glEnd(); */
 
 	glPushMatrix();
 		glTranslated(0.0, 0.0, 5.0);
@@ -78,6 +73,10 @@ void display(void){
 		draw_room();
 	glPopMatrix(); 
 
+
+	#ifdef LIGHTING
+	lighting();
+	#endif
 
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
