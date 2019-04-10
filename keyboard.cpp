@@ -47,22 +47,18 @@ void keyboard(unsigned char key, int x, int y){
 void processSpecialKeys(int key, int x, int y){
 	extern double camX, camY, camZ;
 	extern double centerX, centerY, centerZ;
-	extern double rot;
+	extern double rot, udrot;
+    static int updown=0;
+
 
 	switch(key){
 
 		case(GLUT_KEY_LEFT):
-			rot = 1.0; //rot + 1.0;
-			//if(rot > 360.0){
-			//	rot = rot - 360.0;
-			//}
+			rot = 1.0; 
 			rotateAround();
 			break;
 		case(GLUT_KEY_RIGHT): 
 			rot = -1.0; //rot - 1.0;
-			if(rot < 360.0){
-				rot = rot + 360.0;
-			}
 			rotateAround();
 			break;
 		case(GLUT_KEY_PAGE_UP):
@@ -73,6 +69,27 @@ void processSpecialKeys(int key, int x, int y){
 			camZ = camZ - 0.1;
 			centerZ = centerZ - 0.1;
 			break;
+        case(GLUT_KEY_UP):
+            udrot = -1.0;
+            updown--;
+            if(updown > -89 && updown <= 89){
+                up_down();
+            }
+            else{
+                updown = -89;
+            }
+            break;
+        case(GLUT_KEY_DOWN):
+            udrot = 1.0;
+            updown++;
+            if(updown >= -89 && updown < 89){
+                up_down();
+            }
+            else{
+                updown= 89;
+            }
+            break;    
+
 		/*case(GLUT_KEY_UP):
 			centerZ = centerZ + 1.0;
 			if(centerZ > 90.0){

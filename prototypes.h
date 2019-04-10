@@ -24,4 +24,5 @@ void backward();
 void left();
 void right();
 void lighting();
+void up_down();
 #endif

@@ -25,6 +25,24 @@ void rotateAround(){
 
 }
 
+void up_down(){
+    extern double udrot;
+	double dirX, dirY, dirZ, rotX, rotY;
+
+	dirX = centerX - camX;
+	dirY = centerY - camY;
+	dirZ = centerZ - camZ;
+
+    dirX = (dirX * cos(udrot*3.14/180.0)) + (dirZ * sin(udrot*3.14/180.0));
+    dirZ = (dirX * -sin(udrot*3.14/180.0)) + (dirZ * cos(udrot*3.14/180.0));
+    
+    centerX = dirX + camX;
+    centerY = dirY + camY;
+    centerZ = dirZ + camZ;
+
+}
+
+
 void forward(){
 	double dirX, dirY, dirZ;
 	
