@@ -73,7 +73,7 @@ void processSpecialKeys(int key, int x, int y){
             udrot = -1.0;
             updown--;
             if(updown > -89 && updown <= 89){
-                up_down();
+            //    up_down();
             }
             else{
                 updown = -89;
@@ -83,7 +83,7 @@ void processSpecialKeys(int key, int x, int y){
             udrot = 1.0;
             updown++;
             if(updown >= -89 && updown < 89){
-                up_down();
+            //    up_down();
             }
             else{
                 updown= 89;

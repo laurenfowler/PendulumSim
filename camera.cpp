@@ -8,19 +8,20 @@ extern double X, Y;
 
 void rotateAround(){	
 	double dirX, dirY, dirZ, rotX, rotY;
+	double tmpdirX, tmpdirY;
 	dirX = centerX - camX;
 	dirY = centerY - camY;
 	dirZ = centerZ - camZ;
 
-	dirX = (dirX * cos(rot * 3.14/180.0)) + (dirY * -sin(rot * 3.14/180.0));
-	dirY = (dirX * sin(rot * 3.14/180.0)) + (dirY * cos(rot * 3.14/180.0));
+	tmpdirX = (dirX * cos(rot * 3.14/180.0)) + (dirY * -sin(rot * 3.14/180.0));
+	tmpdirY = (dirX * sin(rot * 3.14/180.0)) + (dirY * cos(rot * 3.14/180.0));
 
 	X = X + camX;
 	Y = Y + camY;
 	//Z = Z + camZ;
 
-	centerX = dirX + camX;
-	centerY = dirY + camY;
+	centerX = tmpdirX + camX;
+	centerY = tmpdirY + camY;
 	centerZ = dirZ + camZ;
 
 }
@@ -28,17 +29,18 @@ void rotateAround(){
 void up_down(){
     extern double udrot;
 	double dirX, dirY, dirZ, rotX, rotY;
+	double tmpdirX, tmpdirZ;
 
 	dirX = centerX - camX;
 	dirY = centerY - camY;
 	dirZ = centerZ - camZ;
 
-    dirX = (dirX * cos(udrot*3.14/180.0)) + (dirZ * sin(udrot*3.14/180.0));
-    dirZ = (dirX * -sin(udrot*3.14/180.0)) + (dirZ * cos(udrot*3.14/180.0));
+    tmpdirX = (dirX * cos(udrot*3.14/180.0)) + (dirZ * sin(udrot*3.14/180.0));
+    tmpdirZ = (dirX * -sin(udrot*3.14/180.0)) + (dirZ * cos(udrot*3.14/180.0));
     
-    centerX = dirX + camX;
+    centerX = tmpdirX + camX;
     centerY = dirY + camY;
-    centerZ = dirZ + camZ;
+    centerZ = tmpdirZ + camZ;
 
 }
 
