@@ -70,24 +70,10 @@ void processSpecialKeys(int key, int x, int y){
 			centerZ = centerZ - 0.1;
 			break;
         case(GLUT_KEY_UP):
-            udrot = -1.0;
-            updown--;
-            if(updown > -89 && updown <= 89){
-            //    up_down();
-            }
-            else{
-                updown = -89;
-            }
+			centerZ = centerZ + 0.1;
             break;
         case(GLUT_KEY_DOWN):
-            udrot = 1.0;
-            updown++;
-            if(updown >= -89 && updown < 89){
-            //    up_down();
-            }
-            else{
-                updown= 89;
-            }
+			centerZ = centerZ - 0.1;
             break;    
 
 		/*case(GLUT_KEY_UP):
