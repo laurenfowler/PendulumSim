@@ -15,6 +15,8 @@ void rotateAround(){
 
 	tmpdirX = (dirX * cos(rot * 3.14/180.0)) + (dirY * -sin(rot * 3.14/180.0));
 	tmpdirY = (dirX * sin(rot * 3.14/180.0)) + (dirY * cos(rot * 3.14/180.0));
+	//cout << tmpdirX << endl;
+	//cout << tmpdirY << endl;
 
 	X = X + camX;
 	Y = Y + camY;
@@ -23,6 +25,8 @@ void rotateAround(){
 	centerX = tmpdirX + camX;
 	centerY = tmpdirY + camY;
 	centerZ = dirZ + camZ;
+
+//	cout << "center: "<< centerX << " " << centerY << " " << centerZ << endl;
 
 }
 
@@ -129,7 +133,7 @@ void left(){
 	centerY = centerY + (crossY*speed);
 	centerZ = centerZ + (crossZ*speed);
 
-	cout << camX << " " << camY << " " << camZ << endl;	
+//	cout << camX << " " << camY << " " << camZ << endl;	
 }
 
 void right(){
@@ -164,6 +168,6 @@ void right(){
 	centerY = centerY - (crossY*speed);
 	centerZ = centerZ - (crossZ*speed);
 
-	cout << camX << " " << camY << " " << camZ << endl;
+//	cout << camX << " " << camY << " " << camZ << endl;
 }
 
