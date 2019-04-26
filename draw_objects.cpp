@@ -7,6 +7,7 @@ void draw_table(){
 
     glPushMatrix();
 	#ifdef LIGHTING
+    glEnable(GL_COLOR_MATERIAL);
     GLfloat mat_specular[] = {0.0, 0.0, 0.0, 1.0};
     GLfloat mat_amb_diff[] = {1.0, 0.98, 0.09, 1.0};
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, mat_amb_diff);
@@ -22,9 +23,6 @@ void draw_table(){
 				   (GLint)      4,
 				   (GLint)     20);
 
-	#ifdef LIGHTING
-    
-   	#endif
     glPopMatrix();
 
     glColorMaterial(GL_FRONT, GL_DIFFUSE);
@@ -41,12 +39,9 @@ void draw_table(){
 		
 	glPopMatrix(); 
 
-	#ifdef LIGHTING
     
-	#endif
 
-
-	glColor3f(1.0, .98431373, .09803922);
+//	glColor3f(1.0, .98431373, .09803922);
 	//draw stand
 	glPushMatrix();
 		glTranslated(0.0, 0.0, -1.0);
@@ -57,10 +52,6 @@ void draw_table(){
 				   (GLint)      20,
 				   (GLint)      20);
 	glPopMatrix();
-
-	#ifdef LIGHTING
-
-	#endif
 
 
 	//draw base
@@ -75,6 +66,7 @@ void draw_table(){
 	glPopMatrix();
 	
 	#ifdef LIGHTING
+    	glDisable(GL_COLOR_MATERIAL);
 	#endif
 
 }

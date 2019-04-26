@@ -26,28 +26,12 @@ void display(void){
 	// We are going to set our position to be down the Y-Axis looking at the
 	// center of the coordinate frame.  The positive Z-Axis will be up.
 	
-	//cout << "camera: " << camX << ", " << camY << ", " << camZ << endl;
-	//cout << "center: " << centerX << ", " << centerY << ", " << centerZ << endl;
-
 	gluLookAt(camX, camY, camZ,
 			  centerX, centerY, centerZ,
 			  0.0, 0.0, 1.0); 
 
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
-
-/*	glBegin(GL_LINES);
-	glVertex3f(0.0, -4.0, 0.0); //y - green
-	glVertex3f(0.0, 4.0, 0.0);
-
-	glColor3f(1.0, 0.0, 0.0);
-	glVertex3f(0.0, 0.0, -4.0); //z - red
-	glVertex3f(0.0, 0.0, 4.0);
-
-	glColor3f(0.0, 0.0, 1.0);   // x - blue
-	glVertex3f(4.0, 0.0, 0.0);
-	glVertex3f(-4.0, 0.0, 0.0);
-	glEnd(); */
 
 	glPushMatrix();
 		glTranslated(0.0, 0.0, 5.0);
@@ -65,6 +49,7 @@ void display(void){
 		glScalef(1.5, 1.5, 1.5);
 		draw_table();
 	glPopMatrix();
+
 
 	//draw room
 	glPushMatrix();
@@ -90,7 +75,7 @@ void display(void){
 	extern char *actualPeriod;
 	extern char *desiredString;
 
-	glColor3f(255, 255, 0);
+	//glColor3f(255, 255, 0);
 	drawString(50, 50, GLUT_BITMAP_HELVETICA_12, charString);
 	drawString(50, 40, GLUT_BITMAP_HELVETICA_12, periodString);
 	drawString(50, 30, GLUT_BITMAP_HELVETICA_12, actualPeriod);
