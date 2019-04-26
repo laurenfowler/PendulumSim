@@ -33,6 +33,14 @@ void display(void){
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
+
+	glPushMatrix();
+		glBegin(GL_LINES);
+		glVertex3f(1.5, -1.5, 1.0);
+		glVertex3f(0.0, 0.0, 0.0);
+		glEnd();
+	glPopMatrix();
+
 	glPushMatrix();
 		glTranslated(0.0, 0.0, 5.0);
 		glutWireCube(0.1);
@@ -57,6 +65,12 @@ void display(void){
 		glScalef(10.0, 9.0, 6.0);
 		draw_room();
 	glPopMatrix(); 
+
+	//draw spotlight
+	glPushMatrix();
+		glTranslated(1.5, -1.5, 1.0);
+		draw_spotlight();
+	glPopMatrix();
 
 
 	#ifdef LIGHTING
