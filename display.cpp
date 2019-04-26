@@ -100,6 +100,29 @@ void display(void){
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 
+
+	//physics display
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(0.0, 300.0, 0.0, 300.0);
+
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+		glPushMatrix();
+			glColor3f(1.0, 1.0, 1.0);
+			glRecti(0.0, 0.0, 300.0, 300.0);
+			glEnd();
+		glPopMatrix();
+	
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+
+
 	glFlush();
 
 	extern float desired_fps; //caculated in physics

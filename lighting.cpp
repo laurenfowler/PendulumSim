@@ -38,7 +38,7 @@ void lighting(){
 	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direction);
 
 
-	glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHTING);
    	//glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
 
