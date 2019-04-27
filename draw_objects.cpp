@@ -249,7 +249,9 @@ void draw_pendulum(){
 
 	//draw stand
 	glPushMatrix();
-	glColor3f(.60784314, 1.0, .85490196);
+//	glColor3f(.60784314, 1.0, .85490196);
+    // Changed color to green for testing
+	glColor3f(0.0, 1.0, 0.0);
 	glTranslated(-1.0, 0.0, -0.55);
 	//glTranslated(-.866025404, 0.0, 0.0);
 	//glTranslated(0.0, 0.5, 0.0);
