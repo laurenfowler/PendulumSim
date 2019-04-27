@@ -37,3 +37,6 @@ lighting.o: lighting.cpp $(HEADERS)
 clean:
 	rm *.o
 	rm a.out
+
+tags:
+	ctags *.h *.c *.cpp
