@@ -37,11 +37,13 @@ void lighting(){
 	direction[0] = 0.0; direction[1] = 1.0; direction[2] = -1.0;
 	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direction);
 
-
-	glEnable(GL_LIGHTING);
+    glShadeModel(GL_SMOOTH);
+    glEnable(GL_COLOR_MATERIAL);
    	glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHTING);
 
-
+    free(light1);
+    free(direction);
 
 }
