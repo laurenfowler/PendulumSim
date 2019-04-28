@@ -33,6 +33,10 @@ void display(void){
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
+	#ifdef LIGHTING
+	lighting();
+	#endif
+
 
 	glPushMatrix();
 		glBegin(GL_LINES);
@@ -73,8 +77,10 @@ void display(void){
 	glPopMatrix();
 
 
+	//disable lighting so it does not affect
+	//ortho projection
 	#ifdef LIGHTING
-	lighting();
+	glDisable(GL_LIGHTING);
 	#endif
 
 	glMatrixMode(GL_PROJECTION);
@@ -101,20 +107,19 @@ void display(void){
 	glMatrixMode(GL_MODELVIEW);
 
 
-	//physics display
 	glMatrixMode(GL_PROJECTION);
+	//physics display
 	glPushMatrix();
 	glLoadIdentity();
-	gluOrtho2D(0.0, 300.0, 0.0, 300.0);
-
+	gluOrtho2D(0.0, 1000.0, 0.0, 1000.0);
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glLoadIdentity();
 
 		glPushMatrix();
 			glColor3f(1.0, 1.0, 1.0);
-			glRecti(0.0, 0.0, 300.0, 300.0);
-			glEnd();
+			glRecti(750.0, 0.0, 1000.0, 250.0);
+			//glEnd();
 		glPopMatrix();
 	
 	glPopMatrix();

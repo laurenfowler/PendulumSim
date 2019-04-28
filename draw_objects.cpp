@@ -192,6 +192,12 @@ void draw_room(){
     #ifdef LIGHTING
         glDisable(GL_COLOR_MATERIAL);
     #endif
+
+	
+	#ifdef TEXTURE
+	glDisable(GL_TEXTURE_2D);
+	#endif
+
 }
 
 void draw_pendulum(){
