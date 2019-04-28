@@ -310,13 +310,29 @@ void draw_spotlight(){
     glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 	#endif
 
+	glPushMatrix();
+	glRotatef(45.0, 0.0, 0.0, 1.0);
+	glRotatef(-120.0, 1.0, 0.0, 0.0);
 	glColor3ub(244, 66, 119);
 	gluCylinder(gluNewQuadric(),
 			(GLdouble) 0.0,
 			(GLdouble) 0.3,
-			(GLdouble) 0.3,
+			(GLdouble) 0.5,
 			(GLint)    20,
 			(GLint)    20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(0.0, 0.0, -3.0);
+	glColor3ub(244,66,119);
+	gluCylinder(gluNewQuadric(),
+			(GLdouble) 0.05,
+			(GLdouble) 0.05,
+			(GLdouble) 3.0, 
+			(GLint)    20,
+			(GLint)    20);
+
+	glPopMatrix();
 
 	#ifdef LIGHTING
 	glDisable(GL_COLOR_MATERIAL);
