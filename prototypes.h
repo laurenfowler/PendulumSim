@@ -15,6 +15,7 @@ void glutLockFrameRate(float desiredFrameRate);
 void draw_room();
 void draw_pendulum();
 void draw_table();
+void draw_spotlight();
 void keyboard(unsigned char key, int x, int y);
 void processSpecialKeys(int key, int x, int y);
 void loadTextures();

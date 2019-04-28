@@ -24,7 +24,7 @@ void lighting(){
 	glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.0);
 
 	float *light1 = (float *) malloc(4*sizeof(float));
-	light1[0] = -1.0; light1[1] = -1.0; light1[2] = 1.0; light1[3] = 1.0;
+	light1[0] = 1.5; light1[1] = -1.5; light1[2] = 1.0; light1[3] = 1.0;
 	glLightfv(GL_LIGHT1, GL_POSITION, light1);
 
 	light1[0]= 0.0; light1[1] = 0.0; light1[2]=0.0; light1[3] = 1.0;
@@ -33,13 +33,13 @@ void lighting(){
    	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1);
    	glLightfv(GL_LIGHT1, GL_SPECULAR, light1);
 
-	float *direction = (float *) malloc(3*sizeof(float));
-	direction[0] = 0.0; direction[1] = 1.0; direction[2] = -1.0;
+	float *direction = (float *) malloc(4*sizeof(float));
+	direction[0] = -1.5; direction[1] = 1.5; direction[2] = -1.0;
 	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direction);
 
-    glShadeModel(GL_SMOOTH);
-    glEnable(GL_COLOR_MATERIAL);
-   	glEnable(GL_LIGHT0);
+
+	glEnable(GL_LIGHTING);
+ 	glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHTING);
 

@@ -73,6 +73,7 @@ void draw_table(){
 
 void draw_room(){
 
+	glColor3f(1.0, 1.0, 1.0);
 	#ifdef LIGHTING
     //this declares material properties
     GLfloat mat_specular[] = {.5, .5, .5, 1.0};
@@ -191,10 +192,17 @@ void draw_room(){
     #ifdef LIGHTING
         glDisable(GL_COLOR_MATERIAL);
     #endif
+
+	
+	#ifdef TEXTURE
+	glDisable(GL_TEXTURE_2D);
+	#endif
+
 }
 
 void draw_pendulum(){
 
+	glColor3f(1.0, 1.0, 1.0);
 	extern double theta;
 
 	#ifdef LIGHTING
@@ -292,3 +300,30 @@ void draw_pendulum(){
     #endif
 
 }
+
+void draw_spotlight(){
+	#ifdef LIGHTING
+    glEnable(GL_COLOR_MATERIAL);
+    GLfloat mat_specular[] = {0.0, 0.0, 0.0, 1.0};
+    GLfloat mat_amb_diff[] = {1.0, 0.98, 0.09, 1.0};
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, mat_amb_diff);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+	#endif
+
+	glColor3ub(244, 66, 119);
+	gluCylinder(gluNewQuadric(),
+			(GLdouble) 0.0,
+			(GLdouble) 0.3,
+			(GLdouble) 0.3,
+			(GLint)    20,
+			(GLint)    20);
+
+	#ifdef LIGHTING
+	glDisable(GL_COLOR_MATERIAL);
+	#endif
+
+}
+
+
+
+
