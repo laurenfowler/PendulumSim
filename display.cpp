@@ -131,7 +131,7 @@ void display(void){
 
 					vector<vector<float>> :: iterator it;
 					//erase value so it keeps putting in new points
-					if(graph.size() == 1000){
+					if(graph.size() == 2500){
 						it = graph.begin();
 						graph.erase(it);
 					}

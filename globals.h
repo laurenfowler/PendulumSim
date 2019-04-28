@@ -38,5 +38,5 @@ GLuint textureID[5];
 
 bool draw_physics = false;
 
-vector<vector<float>> graph [1000];
+vector<vector<float>> graph [2500];
 #endif
