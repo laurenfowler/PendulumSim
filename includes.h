@@ -6,4 +6,6 @@
 #include <math.h>
 #include <iostream>
 #include "SOIL.h"
+#include <vector>
+#include <iterator>
 using namespace std;

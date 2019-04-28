@@ -36,4 +36,7 @@ double Y = 0.0;
 
 GLuint textureID[5];
 
+bool draw_physics = false;
+
+vector<vector<float>> graph [1000];
 #endif

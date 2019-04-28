@@ -1,3 +1,4 @@
+#include "includes.h"
 #ifndef PROTOTYPES
 #define PROTOTYES
 
@@ -26,4 +27,5 @@ void left();
 void right();
 void lighting();
 void up_down();
+void calc_points(vector<float> &points, float x, float y);
 #endif

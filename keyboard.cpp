@@ -6,6 +6,7 @@ void keyboard(unsigned char key, int x, int y){
 	extern double camX, camY, camZ;
 	extern double centerX, centerY, centerZ;
 	extern double rot;
+	extern bool draw_physics;
 
 	switch(key){
 		case 'w':
@@ -36,6 +37,14 @@ void keyboard(unsigned char key, int x, int y){
 			centerX = 1.0;
 			centerY = 0.0;
 			centerZ = 1.0;
+			break;
+		case 'g':
+			if(draw_physics){
+				draw_physics = false;
+			}
+			else{
+				draw_physics = true;
+			}
 		default:
 			break;
 	}

@@ -11,7 +11,8 @@ void drawString(GLuint x, GLuint y, void *font, const char* string){
 
 void display(void){
 
-	extern double theta;
+	extern vector<vector<float>> graph;
+	extern double theta, omega;
 	extern unsigned frames;
 	extern long int period_frames;
 	extern char *charString, *periodString;	
@@ -38,12 +39,13 @@ void display(void){
 	#endif
 
 
-	glPushMatrix();
+	//direction of light
+	/*glPushMatrix();
 		glBegin(GL_LINES);
 		glVertex3f(1.5, -1.5, 1.0);
 		glVertex3f(0.0, 0.0, 0.0);
 		glEnd();
-	glPopMatrix();
+	glPopMatrix(); */
 
 	glPushMatrix();
 		glTranslated(0.0, 0.0, 5.0);
@@ -95,7 +97,7 @@ void display(void){
 	extern char *actualPeriod;
 	extern char *desiredString;
 
-	//glColor3f(255, 255, 0);
+	glColor3f(255, 255, 255);
 	drawString(50, 50, GLUT_BITMAP_HELVETICA_12, charString);
 	drawString(50, 40, GLUT_BITMAP_HELVETICA_12, periodString);
 	drawString(50, 30, GLUT_BITMAP_HELVETICA_12, actualPeriod);
@@ -106,26 +108,54 @@ void display(void){
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 
+	extern bool draw_physics;
 
-	glMatrixMode(GL_PROJECTION);
-	//physics display
-	glPushMatrix();
-	glLoadIdentity();
-	gluOrtho2D(0.0, 1000.0, 0.0, 1000.0);
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
+	if(draw_physics){
+			glMatrixMode(GL_PROJECTION);
+			//physics display
+			glPushMatrix();
+			glLoadIdentity();
+			gluOrtho2D(0.0, 1000.0, 0.0, 1000.0);
+			glMatrixMode(GL_MODELVIEW);
+			glPushMatrix();
+			glLoadIdentity();
 
-		glPushMatrix();
-			glColor3f(1.0, 1.0, 1.0);
-			glRecti(750.0, 0.0, 1000.0, 250.0);
-			//glEnd();
-		glPopMatrix();
-	
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
+				glPushMatrix();
+					glColor3f(0.0, 0.0, 0.0);
+					//draw axes
+					glBegin(GL_LINE_STRIP);
+						glVertex2d(790.0, 220.0);
+						glVertex2d(790.0, 40.0);
+						glVertex2d(975.0, 40.0);
+					glEnd();
+
+					vector<vector<float>> :: iterator it;
+					//erase value so it keeps putting in new points
+					if(graph.size() == 1000){
+						it = graph.begin();
+						graph.erase(it);
+					}
+
+					vector <float> points;
+					calc_points(points, theta, omega);
+					graph.push_back(points);
+
+					glBegin(GL_POINTS);
+					for(it = graph.begin(); it != graph.end(); it++){
+						points = *it;
+						glVertex2f(points.at(0), points.at(1));
+					}
+					glEnd();
+
+					glColor3f(1.0, 1.0, 1.0);
+					glRecti(750.0, 0.0, 1000.0, 250.0);
+				glPopMatrix();
+			
+			glPopMatrix();
+			glMatrixMode(GL_PROJECTION);
+			glPopMatrix();
+			glMatrixMode(GL_MODELVIEW);
+	}
 
 
 	glFlush();
@@ -134,6 +164,8 @@ void display(void){
 	glutLockFrameRate(desired_fps); 
 	glutSwapBuffers();
 }
+
+
 
 void glutLockFrameRate(float desiredFrameRate){
 
