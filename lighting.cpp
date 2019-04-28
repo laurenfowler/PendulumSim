@@ -41,7 +41,9 @@ void lighting(){
 	glEnable(GL_LIGHTING);
  	glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHTING);
 
-
+    free(light1);
+    free(direction);
 
 }
