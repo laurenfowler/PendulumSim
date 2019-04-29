@@ -191,6 +191,7 @@ void checkFPS(int val){
 	extern int curr_period;
 	extern double prev_o, curr_o;
 	extern double curr_t;
+	extern double kick;
 
 	float time;
 
@@ -201,7 +202,9 @@ void checkFPS(int val){
 		sprintf(charString, "FPS: %6.1f", fps);
 	}
 
+	//one period
 	if(omega_neg){
+		kick = 0.2;
 		extern bool count;
 		count = 1;
 		time = curr_period - prev_period;

@@ -7,8 +7,12 @@ void keyboard(unsigned char key, int x, int y){
 	extern double centerX, centerY, centerZ;
 	extern double rot;
 	extern bool draw_physics;
+	extern double kick;
 
 	switch(key){
+		case 'k':
+			kick = 0.5;
+			break;
 		case 'w':
 			forward();
 			break;
