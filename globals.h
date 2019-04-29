@@ -36,4 +36,8 @@ double Y = 0.0;
 
 GLuint textureID[5];
 
+bool draw_physics = false;
+vector<vector<float>> graph [2500];
+
+double kick = .2;
 #endif

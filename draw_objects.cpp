@@ -7,6 +7,7 @@ void draw_table(){
 
     glPushMatrix();
 	#ifdef LIGHTING
+    glEnable(GL_COLOR_MATERIAL);
     GLfloat mat_specular[] = {0.0, 0.0, 0.0, 1.0};
     GLfloat mat_amb_diff[] = {1.0, 0.98, 0.09, 1.0};
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, mat_amb_diff);
@@ -22,9 +23,6 @@ void draw_table(){
 				   (GLint)      4,
 				   (GLint)     20);
 
-	#ifdef LIGHTING
-    
-   	#endif
     glPopMatrix();
 
     glColorMaterial(GL_FRONT, GL_DIFFUSE);
@@ -41,12 +39,9 @@ void draw_table(){
 		
 	glPopMatrix(); 
 
-	#ifdef LIGHTING
     
-	#endif
 
-
-	glColor3f(1.0, .98431373, .09803922);
+//	glColor3f(1.0, .98431373, .09803922);
 	//draw stand
 	glPushMatrix();
 		glTranslated(0.0, 0.0, -1.0);
@@ -57,10 +52,6 @@ void draw_table(){
 				   (GLint)      20,
 				   (GLint)      20);
 	glPopMatrix();
-
-	#ifdef LIGHTING
-
-	#endif
 
 
 	//draw base
@@ -75,12 +66,14 @@ void draw_table(){
 	glPopMatrix();
 	
 	#ifdef LIGHTING
+    	glDisable(GL_COLOR_MATERIAL);
 	#endif
 
 }
 
 void draw_room(){
 
+	glColor3f(1.0, 1.0, 1.0);
 	#ifdef LIGHTING
     //this declares material properties
     GLfloat mat_specular[] = {.5, .5, .5, 1.0};
@@ -199,10 +192,17 @@ void draw_room(){
     #ifdef LIGHTING
         glDisable(GL_COLOR_MATERIAL);
     #endif
+
+	
+	#ifdef TEXTURE
+	glDisable(GL_TEXTURE_2D);
+	#endif
+
 }
 
 void draw_pendulum(){
 
+	glColor3f(1.0, 1.0, 1.0);
 	extern double theta;
 
 	#ifdef LIGHTING
@@ -257,7 +257,9 @@ void draw_pendulum(){
 
 	//draw stand
 	glPushMatrix();
-	glColor3f(.60784314, 1.0, .85490196);
+//	glColor3f(.60784314, 1.0, .85490196);
+    // Changed color to green for testing
+	glColor3f(0.0, 1.0, 0.0);
 	glTranslated(-1.0, 0.0, -0.55);
 	//glTranslated(-.866025404, 0.0, 0.0);
 	//glTranslated(0.0, 0.5, 0.0);
@@ -298,3 +300,46 @@ void draw_pendulum(){
     #endif
 
 }
+
+void draw_spotlight(){
+	#ifdef LIGHTING
+    glEnable(GL_COLOR_MATERIAL);
+    GLfloat mat_specular[] = {0.0, 0.0, 0.0, 1.0};
+    GLfloat mat_amb_diff[] = {1.0, 0.98, 0.09, 1.0};
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, mat_amb_diff);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+	#endif
+
+	glPushMatrix();
+	glRotatef(45.0, 0.0, 0.0, 1.0);
+	glRotatef(-120.0, 1.0, 0.0, 0.0);
+	glColor3ub(244, 66, 119);
+	gluCylinder(gluNewQuadric(),
+			(GLdouble) 0.0,
+			(GLdouble) 0.3,
+			(GLdouble) 0.5,
+			(GLint)    20,
+			(GLint)    20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(0.0, 0.0, -3.0);
+	glColor3ub(244,66,119);
+	gluCylinder(gluNewQuadric(),
+			(GLdouble) 0.05,
+			(GLdouble) 0.05,
+			(GLdouble) 3.0, 
+			(GLint)    20,
+			(GLint)    20);
+
+	glPopMatrix();
+
+	#ifdef LIGHTING
+	glDisable(GL_COLOR_MATERIAL);
+	#endif
+
+}
+
+
+
+

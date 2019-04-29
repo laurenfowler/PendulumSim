@@ -4,7 +4,6 @@
 #include <math.h>
 #define Nstep 1000000
 
-
 // These two functions are the first and second derivative equations
 // to be used in the Runge-Kutta method for the dynamical motion of the pendulum 
 
@@ -15,12 +14,17 @@ double thetadot(double t, double theta, double omega)
 
 double omegadot(double t, double theta, double omega)
 {
+   extern double kick;
+   cout << kick << endl;
+
    static double R = 1.00;  // Length of pendulum  (meters)
    static double g = 9.80;  // Normalized gravitational constant  (m/s^2)
-   static double b = 0.00;  // Frictional damping constant
+   static double b = 0.1;  // Frictional damping constant
    static double m = 1.00;  // Mass in normalized gravitational units (kg)
-   static double A = 0.20;  // Amplitude of initial driving force (kick)
+   static double A = kick;  // Amplitude of initial driving force (kick)
    static double k = 0.10;  // Frequency parameter of initial driving force (when we kick it)
+
+   cout << A << endl;
 
    double num, denom;
 
@@ -54,7 +58,7 @@ void step(double *t, double *theta, double *omega )
 
 	period_frames++;
 
-  h=10000.0/Nstep;   // Try changing the value of Nstep above to see what happens 
+	h=10000.0/Nstep;   // Try changing the value of Nstep above to see what happens 
 
       // Fourth-Order Runge-Kutta propagation step for second order dynamical systems
         k1 = thetadot(*t, *theta, *omega); 
@@ -90,7 +94,6 @@ void step(double *t, double *theta, double *omega )
 
 		
 		prev_o = curr_o;
-		
 }
 
 /*int main(int argc, char** argv)

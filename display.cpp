@@ -11,7 +11,8 @@ void drawString(GLuint x, GLuint y, void *font, const char* string){
 
 void display(void){
 
-	extern double theta;
+	extern vector<vector<float>> graph;
+	extern double theta, omega;
 	extern unsigned frames;
 	extern long int period_frames;
 	extern char *charString, *periodString;	
@@ -26,9 +27,6 @@ void display(void){
 	// We are going to set our position to be down the Y-Axis looking at the
 	// center of the coordinate frame.  The positive Z-Axis will be up.
 	
-	//cout << "camera: " << camX << ", " << camY << ", " << camZ << endl;
-	//cout << "center: " << centerX << ", " << centerY << ", " << centerZ << endl;
-
 	gluLookAt(camX, camY, camZ,
 			  centerX, centerY, centerZ,
 			  0.0, 0.0, 1.0); 
@@ -36,18 +34,18 @@ void display(void){
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
-/*	glBegin(GL_LINES);
-	glVertex3f(0.0, -4.0, 0.0); //y - green
-	glVertex3f(0.0, 4.0, 0.0);
+	#ifdef LIGHTING
+	lighting();
+	#endif
 
-	glColor3f(1.0, 0.0, 0.0);
-	glVertex3f(0.0, 0.0, -4.0); //z - red
-	glVertex3f(0.0, 0.0, 4.0);
 
-	glColor3f(0.0, 0.0, 1.0);   // x - blue
-	glVertex3f(4.0, 0.0, 0.0);
-	glVertex3f(-4.0, 0.0, 0.0);
-	glEnd(); */
+	//direction of light
+	/*glPushMatrix();
+		glBegin(GL_LINES);
+		glVertex3f(1.5, -1.5, 1.0);
+		glVertex3f(0.0, 0.0, 0.0);
+		glEnd();
+	glPopMatrix(); */
 
 	glPushMatrix();
 		glTranslated(0.0, 0.0, 5.0);
@@ -66,6 +64,7 @@ void display(void){
 		draw_table();
 	glPopMatrix();
 
+
 	//draw room
 	glPushMatrix();
 		glTranslated(0.0, 0.0, 3.8);
@@ -73,9 +72,17 @@ void display(void){
 		draw_room();
 	glPopMatrix(); 
 
+	//draw spotlight
+	glPushMatrix();
+		glTranslated(1.5, -1.5, 1.0);
+		draw_spotlight();
+	glPopMatrix();
 
+
+	//disable lighting so it does not affect
+	//ortho projection
 	#ifdef LIGHTING
-	lighting();
+	glDisable(GL_LIGHTING);
 	#endif
 
 	glMatrixMode(GL_PROJECTION);
@@ -90,7 +97,7 @@ void display(void){
 	extern char *actualPeriod;
 	extern char *desiredString;
 
-	glColor3f(255, 255, 0);
+	glColor3f(255, 255, 255);
 	drawString(50, 50, GLUT_BITMAP_HELVETICA_12, charString);
 	drawString(50, 40, GLUT_BITMAP_HELVETICA_12, periodString);
 	drawString(50, 30, GLUT_BITMAP_HELVETICA_12, actualPeriod);
@@ -101,12 +108,73 @@ void display(void){
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 
+	extern bool draw_physics;
+
+	if(draw_physics){
+			glMatrixMode(GL_PROJECTION);
+			//physics display
+			glPushMatrix();
+			glLoadIdentity();
+			gluOrtho2D(0.0, 1000.0, 0.0, 1000.0);
+			glMatrixMode(GL_MODELVIEW);
+			glPushMatrix();
+			glLoadIdentity();
+
+				glPushMatrix();
+					glColor3f(0.0, 0.0, 0.0);
+					//draw axes
+					glBegin(GL_LINE_STRIP);
+						glVertex2d(790.0, 220.0);
+						glVertex2d(790.0, 40.0);
+						glVertex2d(975.0, 40.0);
+					glEnd();
+
+                
+                    char *yaxis = (char *) malloc(5 * sizeof(char));
+                    sprintf(yaxis, "d0/dt");
+                    drawString(750, 100, GLUT_BITMAP_HELVETICA_12, yaxis);
+
+                    char *xaxis = (char *) malloc(5 * sizeof(char));
+                    sprintf(xaxis, "theta");
+                    drawString(850, 20, GLUT_BITMAP_HELVETICA_12, xaxis);
+
+					vector<vector<float>> :: iterator it;
+					//erase value so it keeps putting in new points
+					if(graph.size() == 2500){
+						it = graph.begin();
+						graph.erase(it);
+					}
+
+					vector <float> points;
+					calc_points(points, theta, omega);
+					graph.push_back(points);
+
+					glBegin(GL_POINTS);
+					for(it = graph.begin(); it != graph.end(); it++){
+						points = *it;
+						glVertex2f(points.at(0), points.at(1));
+					}
+					glEnd();
+
+					glColor3f(1.0, 1.0, 1.0);
+					glRecti(750.0, 0.0, 1000.0, 250.0);
+				glPopMatrix();
+			
+			glPopMatrix();
+			glMatrixMode(GL_PROJECTION);
+			glPopMatrix();
+			glMatrixMode(GL_MODELVIEW);
+	}
+
+
 	glFlush();
 
 	extern float desired_fps; //caculated in physics
 	glutLockFrameRate(desired_fps); 
 	glutSwapBuffers();
 }
+
+
 
 void glutLockFrameRate(float desiredFrameRate){
 
@@ -132,6 +200,7 @@ void checkFPS(int val){
 	extern int curr_period;
 	extern double prev_o, curr_o;
 	extern double curr_t;
+	extern double kick;
 
 	float time;
 
@@ -142,7 +211,9 @@ void checkFPS(int val){
 		sprintf(charString, "FPS: %6.1f", fps);
 	}
 
+	//one period
 	if(omega_neg){
+		kick = 0.2;
 		extern bool count;
 		count = 1;
 		time = curr_period - prev_period;
