@@ -129,6 +129,15 @@ void display(void){
 						glVertex2d(975.0, 40.0);
 					glEnd();
 
+                
+                    char *yaxis = (char *) malloc(5 * sizeof(char));
+                    sprintf(yaxis, "d0/dt");
+                    drawString(750, 100, GLUT_BITMAP_HELVETICA_12, yaxis);
+
+                    char *xaxis = (char *) malloc(5 * sizeof(char));
+                    sprintf(xaxis, "theta");
+                    drawString(850, 20, GLUT_BITMAP_HELVETICA_12, xaxis);
+
 					vector<vector<float>> :: iterator it;
 					//erase value so it keeps putting in new points
 					if(graph.size() == 2500){

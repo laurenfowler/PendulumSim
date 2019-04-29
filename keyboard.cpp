@@ -8,8 +8,12 @@ void keyboard(unsigned char key, int x, int y){
 	extern double rot;
 	extern bool draw_physics;
 	extern double kick;
+    extern vector<vector<float>> graph;
 
 	switch(key){
+        case 'c':
+            graph.clear();
+            break;
 		case 'k':
 			kick = 0.5;
 			break;
@@ -24,12 +28,6 @@ void keyboard(unsigned char key, int x, int y){
 			break;
 		case 'd':
 			right();
-			break;
-		case 'c':
-			cout << "cam: " << camX << " " << camY << " " << camZ << endl;
-			break;
-		case 'v':
-			cout << "center: " << centerX << " " << centerY << " " << centerZ << endl;
 			break;
 		case 'q':
 			exit(0);
